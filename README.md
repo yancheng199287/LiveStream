@@ -62,4 +62,6 @@ git pull
 
   推流地址：     rtmp://192.168.0.200/live/livestream
   观看HTTP FLV流地址为： http://192.168.0.200:8080/live/livestream.flv
+  
+### 最后 使用本项目中的 play.html 页面打开，输入你的播放地址就可以看了
 

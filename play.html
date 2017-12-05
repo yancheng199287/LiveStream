@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>520code视频直播</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://vjs.zencdn.net/5.5.3/video-js.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.css" rel="stylesheet">
+    <script src="http://vjs.zencdn.net/ie8/1.1.1/videojs-ie8.min.js"></script>
+
+    <style type="text/css">
+        .container {
+            display: table;
+            height: 100%;
+        }
+        .row {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<!--  由于RTMP HTTP-FLV协议的支持需要客户端支持，依赖flash 手机浏览器没有所以无法播放，另外电脑浏览器只有360默认开启，其他可能存在拦截或者需要手动开启 -->
+<div class="container">
+    <div class="row">
+        <h3>520code.com/play.html 在线视频直播</h3>
+        <div class="col-md-1">
+
+            <video id="my-video" class="video-js" controls preload="auto" width="350" height="200"
+                   poster="http://ppt.downhot.com/d/file/p/2014/08/12/9d92575b4962a981bd9af247ef142449.jpg"
+                   data-setup="{}">
+                <p class="vjs-no-js">播放视频需要启用 JavaScript，推荐使用支持HTML5的浏览器访问。
+                    To view this video please enable JavaScript, and consider upgrading to a web browser that
+                    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
+        </div>
+
+        <div class="col-md-1">
+            <label>Rtmp:</label>
+            <input type="text" class="form-control"  id="video-rtmp" style="width: 500px;" placeholder="请输入RTMP视频地址"
+                   value="rtmp://oneinlet.com:1935/live/movie">
+            <button type="button" class="btn btn-default" onclick="videoRtmp()">播放</button>
+        </div>
+            </br>
+        <div class="col-md-1">
+            <label>HttpFlv:</label>
+            <input type="text" id="video-hlv" class="form-control" style="width: 500px;" placeholder="请输入HLV视频地址"
+                   value="http://192.168.0.200:8082/live/livestream.flv">
+            <button type="button" class="btn btn-default" onclick="videoHlv()">播放</button>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script src="http://vjs.zencdn.net/5.5.3/video.js"></script>
+
+<script>
+    function videoRtmp() {
+        var rtmpUrl = $("#video-rtmp").val()
+        alert(rtmpUrl)
+        play(rtmpUrl, "rtmp/flv")
+    }
+
+    function videoHlv() {
+        var httpFlvUrl = $("#video-hlv").val()
+        alert(httpFlvUrl)
+        play(httpFlvUrl, "video/x-flv")
+    }
+
+    function play(url, type) {
+        var myPlayer = videojs('my-video');
+        myPlayer.src({"type": type, "src": url});
+        myPlayer.play();
+    }
+
+  /*
+  根据后缀自动判断识别类型
+  $("#change-video")[0].addEventListener('click', function(){
+        var newUrl = $('#video-url')[0].value.trim();
+        if(newUrl.indexOf('rtmp') == 0) {
+            if(window.hasFlash) {
+                player.src({"type":"rtmp/flv", "src":newUrl });
+                player.play();
+            }else {
+                alert('您的浏览器没有安装flash插件或flash被禁用');
+            }
+        }else if(newUrl.indexOf('http') == 0 && newUrl.endWith('.mp4')) {
+            player.src({"type":"video/mp4", "src":newUrl });
+            player.play();
+        }else if(newUrl.indexOf('http') == 0 && newUrl.endWith('.m3u8'))  {
+            //resizePlayer('example-video', 200);
+            player.src({"type":"application/x-mpegURL", "src":newUrl });
+            player.play();
+        }else if(newUrl.indexOf('http') == 0 && newUrl.indexOf('.flv') != -1) {
+            if(window.hasFlash) {
+                player.src({"type": "video/x-flv", "src": newUrl});
+                player.play();
+            }else {
+                alert('您的浏览器没有安装flash插件或flash被禁用');
+            }
+        }
+        else{
+            alert('请填写正确的url');
+        }
+    });*/
+
+</script>
+
+</body>
+</html>

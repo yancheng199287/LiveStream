@@ -68,3 +68,30 @@ git pull
   
 ### 最后 使用本项目中的 play.html 页面打开，输入你的播放地址就可以看了
 
+
+> 以上的HTPP-FLV和RTMP流只能在FLASH下播放，然而很多浏览器已经不支持，尤其MAC下几乎都默认屏蔽，所以只能手动开启或者下载专有的客户端，如VLC播放。
+那么如果想要在各大平台浏览器上播放，得使用支持H5的video标签播放，我们一般采用m3u8格式的流。那么如果使用srs启动使用m3u8呢？
+
+
+
+git clone https://github.com/ossrs/srs
+cd srs/trunk
+
+./configure --with-nginx  //注意这一步可能会存在依赖不全的问题，需要下载对应依赖项安装再编译
+
+make  //安装
+
+
+sudo ./objs/nginx/sbin/nginx   //启动分发hls（m3u8/ts）的nginx
+注意假如你要改nginx配置文件，则需要更改此文件  /home/srs.oschina/trunk/objs/nginx/conf/nginx.conf   比如你可以改端口，虚拟主机等。
+
+./objs/srs -c conf/hls.conf       // 启动SRS
+
+RTMP流地址为：rtmp://192.168.1.170/live/livestream
+HLS流地址为： http://192.168.1.170/live/livestream.m3u8
+
+
+
+
+
+
